@@ -14,7 +14,7 @@ services:
     ports:
       - ${WEB_PORT:-3100}:80
     volumes:
-      - ../../application/simple-app:/work
+      - ./:/work
     env_file:
       - ./.env
 
@@ -29,7 +29,7 @@ services:
     env_file:
       - ./.env
     volumes:
-      - ../simple-app:/work
+      - ./:/work
     working_dir: /work
 
   pgsql:
