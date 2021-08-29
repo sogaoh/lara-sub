@@ -13,3 +13,15 @@ npm-debug.log
 yarn-error.log
 /.idea
 /.vscode
+
+.idea
+.DS_Store
+
+/bootstrap/cache/*
+/storage/debugbar/*
+/storage/framework/cache/*
+/storage/framework/sessions/*
+/storage/framework/testing/*
+/storage/framework/views/*
+/storage/logs/*
+

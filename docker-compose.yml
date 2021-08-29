@@ -1,0 +1,48 @@
+version: "3.8"
+
+volumes:
+  pgsql:
+    driver: local
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: ./docker/nginx-node/Dockerfile
+    depends_on:
+      - app
+    ports:
+      - ${WEB_PORT:-3100}:80
+    volumes:
+      - ../../application/simple-app:/work
+    env_file:
+      - ./.env
+
+  app:
+    build:
+      context: .
+      dockerfile: ./docker/php/Dockerfile
+      args:
+        - TZ=Asia/Tokyo
+    depends_on:
+      - pgsql
+    env_file:
+      - ./.env
+    volumes:
+      - ../simple-app:/work
+    working_dir: /work
+
+  pgsql:
+    build:
+      context: .
+      dockerfile: ./docker/pgsql/Dockerfile
+    volumes:
+      - ~/.simple-app/data/postgres:/var/lib/postgresql/data
+      - ./docker/pgsql/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
+    ports:
+      - "${POSTGRES_PORT}:5432"
+    environment:
+      - TZ=Asia/Tokyo
+      - POSTGRES_DB=${DB_DATABASE}
+      - POSTGRES_USER=${DB_USERNAME}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
