@@ -39,7 +39,7 @@ web:
 app:
 	docker-compose exec app ash
 db:
-	docker-compose exec pgsql ash
+	docker-compose exec db ash
 
 
 ################################################################################

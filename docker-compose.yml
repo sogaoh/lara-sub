@@ -25,14 +25,14 @@ services:
       args:
         - TZ=Asia/Tokyo
     depends_on:
-      - pgsql
+      - db
     env_file:
       - ./.env
     volumes:
       - ./:/work
     working_dir: /work
 
-  pgsql:
+  db:
     build:
       context: .
       dockerfile: ./docker/pgsql/Dockerfile
