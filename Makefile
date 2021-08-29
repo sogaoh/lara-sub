@@ -36,7 +36,7 @@ restart:
 # exec
 web:
 	docker-compose exec web ash
-app:
+lara:
 	docker-compose exec app ash
 db:
 	docker-compose exec db ash
